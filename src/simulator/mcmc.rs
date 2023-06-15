@@ -7,6 +7,7 @@ pub struct MCMCConfig {
 	pub warmup: usize,
 	pub sweeps: usize,
 	pub plot: bool,
+	pub simulation_name: String,
 	pub beta: f64,
 }
 
@@ -17,13 +18,14 @@ pub struct MCMC {
 }
 
 impl MCMC {
-	pub fn new(circuit: Circuit) -> MCMC {
-		MCMC { 
-			circuit, 
+	pub fn new(circuit: Circuit, simulation_name: &str) -> MCMC {
+		MCMC {
+			circuit,
 			config: MCMCConfig {
 				warmup: 20,
 				sweeps: 10000,
 				plot: true,
+				simulation_name: simulation_name.to_string(),
 				beta: 1.0
 			},
 			activations: Vec::new()
@@ -61,7 +63,7 @@ impl MCMC {
 		}
 
 		if self.config.plot {
-			plotter.plot("mcmc.png").unwrap();
+			plotter.plot(&self.config.simulation_name).unwrap();
 		}
 	}
 

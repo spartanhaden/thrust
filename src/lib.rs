@@ -23,7 +23,7 @@ mod tests {
         let mut circuit = Circuit::from_vector(vec![Box::new(cp0)]);
         circuit.compile();
 
-        let mut sim = MCMC::new(circuit);
+        let mut sim = MCMC::new(circuit, "copy_gate");
         sim.run();
     }
 
@@ -38,7 +38,7 @@ mod tests {
         let mut circuit = Circuit::from_vector(vec![Box::new(and0)]);
         circuit.compile();
 
-        let mut sim = MCMC::new(circuit);
+        let mut sim = MCMC::new(circuit, "and_gate");
         sim.run();
     }
 
@@ -53,7 +53,7 @@ mod tests {
         let mut circuit = Circuit::from_vector(vec![Box::new(and0)]);
         circuit.compile();
 
-        let mut sim = MCMC::new(circuit);
+        let mut sim = MCMC::new(circuit, "or_gate");
         sim.run();
     }
 
@@ -71,7 +71,7 @@ mod tests {
         circuit.append(Box::new(Or::new(p3, p4, p5)));
         circuit.compile();
 
-        let mut sim = MCMC::new(circuit);
+        let mut sim = MCMC::new(circuit, "composed_circuit");
         sim.run();
     }
 }
